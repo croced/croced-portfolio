@@ -11,7 +11,7 @@ interface Props {
 
 const underlineStyling: string = " underline-offset-4 decoration-2 decoration-intu-primary " as const;
 const desktopStyling: string = "px-3 py-2 rounded-md text-sm font-medium" as const;
-const mobileStyling: string = "text-neutral-300 hover:bg-neutral-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium" as const;
+const mobileStyling: string = "text-neutral-300 hover:bg-stone-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium" as const;
 
 const NavigationItem: React.FC<Props> = ({href, label, mobile, onClick}) => {
     
@@ -26,7 +26,7 @@ const NavigationItem: React.FC<Props> = ({href, label, mobile, onClick}) => {
                 (isActive ? "underline text-white" : "hover:underline text-text-primary") + underlineStyling + (mobile ? mobileStyling : desktopStyling)
             }
         >
-            {label}
+           {label}
         </Link>
     )
 }
