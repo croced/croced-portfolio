@@ -11,7 +11,7 @@ const navItems = [
     { label: 'services', href: '/services'},
     { label: 'about', href: '/about'},
     { label: 'contact', href: '/contact'},
-];
+] as const;
 
 const NavigationBar: React.FC<Props> = () => {
     const [isOpen, setIsOpen] = useState(false);
