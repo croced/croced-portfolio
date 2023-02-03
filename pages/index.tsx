@@ -18,6 +18,7 @@ export default function Home() {
               <div className="font-semibold text-xl lg:text-2xl xl:text-3xl">software engineer. web designer.</div>
             </div>
 
+            {/* smaller text beneath */}
             <p className="mt-5 text-white text-lg font-light">need a website?</p>
             <a href="#" className="mt-5 text-white text-lg font-light underline">get in touch!</a>
 
