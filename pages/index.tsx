@@ -43,8 +43,11 @@ export default function Home() {
         </div>
 
         {/* information */}
-        <p className="mt-5 text-white text-lg">my links...</p>
-        {renderLinks()}
+        {/* <p className="mt-5 text-white text-lg">my links...</p> */}
+        <div className='mt-12'>
+          {renderLinks()}
+        </div>
+        
 
         {/* browser image */}            
         <div className='my-auto relative'>
