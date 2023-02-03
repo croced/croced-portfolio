@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useEffect, useState } from 'react';
 
 const links = [
   { label: 'linkedin', href: 'https://www.linkedin.com/in/daniel-croce'},
@@ -8,10 +9,48 @@ const links = [
 
 export default function Home() {
 
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  /**
+   * Keeps track of the current system theme (light or dark mode)
+   */
+  useEffect(() => {
+    // initial setting
+    setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+    // listener
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => setTheme(e.matches ? 'dark' : 'light'));
+
+    return () => {
+      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', () => {
+      });
+    }
+  }, []);
+
+  /**
+   * Gets the path to the current browser image, depending on system theme
+   * @returns the path to the browser image
+   */
+  const getBrowserImage = (): string => {
+
+    var path: string = "browser-dark.svg"; // default is dark
+
+    if (typeof window === 'undefined') return path;
+
+    // dark mode checking
+    if (window.matchMedia) {
+      if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        path = "browser-light.svg";
+      }
+    }
+
+    return path;
+  }
+
   const renderLinks = () => {
     return links.map((social, i) => {
 
-      let seperator = <span className="text-white text-lg"> {'\|'} </span>;
+      let seperator = <span className="text-lg"> {'\|'} </span>;
 
       // don't display seperator for last item
       if (i >= (links.length - 1))
@@ -19,7 +58,7 @@ export default function Home() {
 
       return (
         <>
-          <a href={social.href} target='_blank' rel='noreferrer' className="text-white text-lg underline">{social.label}</a>
+          <a href={social.href} target='_blank' rel='noreferrer' className="text-lg underline">{social.label}</a>
           {seperator}
         </>
       ) 
@@ -43,7 +82,6 @@ export default function Home() {
         </div>
 
         {/* information */}
-        {/* <p className="mt-5 text-white text-lg">my links...</p> */}
         <div className='mt-12'>
           {renderLinks()}
         </div>
@@ -52,7 +90,7 @@ export default function Home() {
         {/* browser image */}            
         <div className='my-auto relative'>
           <div className="absolute bottom-0 right-0 invisible md:visible transform md:translate-y-1/4 md:w-5/12">
-            <img draggable={false} src="/browser.svg" alt="webpage" />
+            <img draggable={false} src={`/${getBrowserImage()}`} alt="webpage" />
           </div>
         </div>
       </div>

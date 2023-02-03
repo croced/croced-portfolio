@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef, useState, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 import NavigationItem from "./NavigationItem";
 import Link from "next/link";
@@ -16,6 +16,24 @@ const navItems = [
 const NavigationBar: React.FC<Props> = () => {
     const [isOpen, setIsOpen] = useState(false);
     const mobileItemsRef = useRef(null);
+
+    const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+    /**
+     * Keeps track of the current system theme (light or dark mode)
+     */
+    useEffect(() => {
+      // initial setting
+      setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  
+      // listener
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => setTheme(e.matches ? 'dark' : 'light'));
+  
+      return () => {
+        window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', () => {
+        });
+      }
+    }, []);
 
     const onItemClick = useCallback(() => {
         setIsOpen(false);
@@ -57,7 +75,7 @@ const NavigationBar: React.FC<Props> = () => {
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
-                                    stroke="white"
+                                    stroke={theme === "dark" ? "white" : "black"}
                                     aria-hidden="true"
                                 >
                                     <path
@@ -73,7 +91,7 @@ const NavigationBar: React.FC<Props> = () => {
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
-                                    stroke="white"
+                                    stroke={theme === "dark" ? "white" : "black"}
                                     aria-hidden="true"
                                 >
                                     <path
@@ -99,7 +117,7 @@ const NavigationBar: React.FC<Props> = () => {
                 leaveTo="opacity-0 scale-95"
             >
                 <div className="md:hidden bg-black" id="mobile-menu">
-                        <div ref={mobileItemsRef} className="absolute z-0 pt-2 pb-3 space-y-1 w-full border-2 bg-black">
+                        <div ref={mobileItemsRef} className={`absolute z-0 pt-2 pb-3 space-y-1 w-full border-2 ${theme === 'dark' ? 'border-white bg-black' : 'border-black bg-white'}`}>
                             {navItems.map((item) => {
                                 return <NavigationItem key={item.href} href={item.href} label={item.label} onClick={onItemClick} mobile />;
                             })}
