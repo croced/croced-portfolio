@@ -14,7 +14,7 @@ export default function Home() {
         <div className="my-auto w-full">
           {/* typewriter text */}
             <div className="writer">
-              <div className="writer-text text-4xl lg:text-5xl xl:text-6xl mb-4">hi, i'm dan </div>
+              <div className="writer-text text-4xl lg:text-5xl xl:text-6xl mb-4">hi, i&apos;m dan </div>
               <div className="font-semibold text-xl lg:text-2xl xl:text-3xl">software engineer. web designer.</div>
             </div>
 
