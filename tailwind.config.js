@@ -9,9 +9,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        'sans': ['Monaco', ...defaultTheme.fontFamily.sans],
-      },
       fontSize: {
         'splash-md': '5rem',
         'splash-sm': '2.75rem',

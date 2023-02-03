@@ -9,7 +9,7 @@ interface Props {
     onClick?: () => void;
 }
 
-const underlineStyling: string = " underline-offset-4 decoration-2 decoration-intu-primary " as const;
+const underlineStyling: string = " relative z-2 underline-offset-4 decoration-2 decoration-intu-primary " as const;
 const desktopStyling: string = "px-3 py-2 rounded-md text-sm font-medium" as const;
 const mobileStyling: string = "text-neutral-300 hover:bg-stone-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium" as const;
 
