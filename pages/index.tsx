@@ -15,12 +15,12 @@ export default function Home() {
           {/* typewriter text */}
             <div className="writer">
               <div className="writer-text text-4xl lg:text-5xl xl:text-6xl mb-4">hi, i&apos;m dan </div>
-              <div className="font-semibold text-xl lg:text-2xl xl:text-3xl">software engineer. web designer.</div>
+              <div className="text-xl lg:text-2xl xl:text-3xl">software engineer. web designer.</div>
             </div>
 
             {/* smaller text beneath */}
-            <p className="mt-5 text-white text-lg font-light">need a website?</p>
-            <a href="#" className="mt-5 text-white text-lg font-light underline">get in touch!</a>
+            <p className="mt-5 text-white text-lg">need a website?</p>
+            <a href="#" className="mt-5 text-white text-lg underline">get in touch!</a>
 
             <div className='my-auto relative'>
               {/* webpage image */}

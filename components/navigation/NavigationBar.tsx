@@ -97,7 +97,7 @@ const NavigationBar: React.FC<Props> = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
             >
-                <div className="md:hidden bg-neutral-800" id="mobile-menu">
+                <div className="md:hidden bg-stone-900" id="mobile-menu">
                         <div ref={mobileItemsRef} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                             {navItems.map((item) => {
                                 return <NavigationItem key={item.href} href={item.href} label={item.label} onClick={onItemClick} mobile />;
