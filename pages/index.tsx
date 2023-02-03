@@ -19,7 +19,7 @@ export default function Home() {
 
       return (
         <>
-          <a href={social.href} target='_blank' rel='noopener' className="text-white text-lg underline">{social.label}</a>
+          <a href={social.href} target='_blank' rel='noreferrer' className="text-white text-lg underline">{social.label}</a>
           {seperator}
         </>
       ) 
