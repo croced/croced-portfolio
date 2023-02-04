@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 import NavigationItem from "./NavigationItem";
 import Link from "next/link";
+import useThemeProvider from "@/hooks/useThemeProvider";
 
 interface Props { }
 
@@ -17,23 +18,7 @@ const NavigationBar: React.FC<Props> = () => {
     const [isOpen, setIsOpen] = useState(false);
     const mobileItemsRef = useRef(null);
 
-    const [theme, setTheme] = useState<"dark" | "light">("dark");
-
-    /**
-     * Keeps track of the current system theme (light or dark mode)
-     */
-    useEffect(() => {
-      // initial setting
-      setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  
-      // listener
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => setTheme(e.matches ? 'dark' : 'light'));
-  
-      return () => {
-        window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', () => {
-        });
-      }
-    }, []);
+    const theme = useThemeProvider();
 
     const onItemClick = useCallback(() => {
         setIsOpen(false);

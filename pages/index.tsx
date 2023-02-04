@@ -1,5 +1,6 @@
+import React from 'react';
+import useThemeProvider from '@/hooks/useThemeProvider';
 import Head from 'next/head'
-import { useEffect, useState } from 'react';
 
 const links = [
   { label: 'linkedin', href: 'https://www.linkedin.com/in/daniel-croce'},
@@ -7,42 +8,18 @@ const links = [
   { label: 'github', href: 'https://github.com/croced'},
 ] as const;
 
-export default function Home() {
+const Home: React.FC = () => {
 
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
-
-  /**
-   * Keeps track of the current system theme (light or dark mode)
-   */
-  useEffect(() => {
-    // initial setting
-    setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
-    // listener
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => setTheme(e.matches ? 'dark' : 'light'));
-
-    return () => {
-      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', () => {
-      });
-    }
-  }, []);
+  const theme = useThemeProvider();
 
   /**
    * Gets the path to the current browser image, depending on system theme
    * @returns the path to the browser image
    */
   const getBrowserImage = (): string => {
-
-    var path: string = "browser-dark.svg"; // default is dark
-
-    if (typeof window === 'undefined') return path;
-
-    // dark mode checking
-    if (window.matchMedia) {
-      if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        path = "browser-light.svg";
-      }
-    }
+    var path: string;
+    
+    theme === "light" ? path = "browser-light.svg" : path = "browser-dark.svg";
 
     return path;
   }
@@ -97,3 +74,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home;
