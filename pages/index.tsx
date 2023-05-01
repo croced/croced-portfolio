@@ -24,6 +24,10 @@ const Home: React.FC = () => {
     return path;
   }
 
+  /**
+   * Renders a list of social media links
+   * @returns rendered social media links (link 1 | link 2, etc.)
+   */
   const renderLinks = () => {
     return links.map((social, i) => {
 
@@ -51,25 +55,32 @@ const Home: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="my-auto w-full">
-        {/* title (typrwriter effect) */}
-        <div className="writer">
-          <div className="writer-text text-4xl lg:text-5xl xl:text-6xl mb-4">hi, i&apos;m dan </div>
+      <div className='my-auto md:flex md:flex-row w-full md:relative'>
+
+        {/* flexbox for content */}
+        <div className='py-20 flex-auto'>
+          {/* title (typewriter effect) */}
+          <div className="writer">
+            <div className="writer-text text-4xl lg:text-5xl xl:text-6xl mb-4">hi, i&apos;m dan </div>
+          </div>
+
+          {/* subtitles */}
           <div className="text-xl lg:text-2xl xl:text-3xl">software engineer. web designer.</div>
-        </div>
 
-        {/* information */}
-        <div className='mt-12'>
-          {renderLinks()}
-        </div>
-        
-
-        {/* browser image */}            
-        <div className='my-auto relative'>
-          <div className="absolute bottom-0 right-0 invisible md:visible transform md:translate-y-1/4 md:w-5/12">
-            <img draggable={false} src={`/${getBrowserImage()}`} alt="webpage" />
+          {/* information */}
+          <div className='mt-12'>  
+            {renderLinks()}
+            <div className="text-sm lg:text-md xl:text-lg mt-2 md:mt-0">(based in liverpool, uk)</div>
           </div>
         </div>
+
+        {/* flexbox for splash image */}
+        <div className='flex-auto relative w-1/3 invisible md:visible'>
+          <div className="h-full absolute right-0 invisible md:visible ">
+            <img className='h-full w-auto' draggable={false} src={`/${getBrowserImage()}`} alt="webpage" />
+          </div>
+        </div>
+
       </div>
     </>
   )

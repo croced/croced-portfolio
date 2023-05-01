@@ -8,9 +8,8 @@ interface Props { }
 
 const navItems = [
     { label: 'home', href: '/'},
-    { label: 'work', href: '/work'},
-    { label: 'services', href: '/services'},
     { label: 'about', href: '/about'},
+    { label: 'my work', href: '/my-work'},
     { label: 'contact', href: '/contact'},
 ] as const;
 
