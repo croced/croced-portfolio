@@ -12,7 +12,7 @@ const About: React.FC = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <p>it&apos;s about bloody time you visited me...</p>
+            <p>about page</p>
         </>
       
     )
