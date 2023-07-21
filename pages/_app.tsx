@@ -7,9 +7,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
     <div className='mx-4 md:mx-8'>
         <NavigationBar />
 
-        <div className='min-h-screen'>
-          <Component {...pageProps} />
-        </div>
+        <Component {...pageProps} />
     </div>
   ) 
 }

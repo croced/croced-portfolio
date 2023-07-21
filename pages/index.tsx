@@ -48,7 +48,10 @@ const Home: React.FC = () => {
   }
 
   return (
-    <>
+    <div  style={{
+      maxHeight: `calc(100vh - 4rem)`,
+      overflowY: 'hidden', // Enable vertical scrolling if content exceeds the max-height
+    }}>
      <Head>
         <title>croced | portfolio</title>
         <meta name="description" content="croced: my portfolio" />
@@ -85,7 +88,7 @@ const Home: React.FC = () => {
 
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
