@@ -1,6 +1,7 @@
 import React from 'react';
 import useThemeProvider from '@/hooks/useThemeProvider';
 import Head from 'next/head'
+import TypewriterText from '@/components/common/TypewriterText';
 
 const links = [
   { label: 'linkedin', href: 'https://www.linkedin.com/in/daniel-croce'},
@@ -55,32 +56,34 @@ const Home: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className='my-auto md:flex md:flex-row w-full md:relative'>
+      <div className='flex flex-col h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='my-auto md:flex md:flex-row w-full md:relative'>
+      
+          {/* flexbox for content */}
+          <div className='py-20 flex-auto'>
+            {/* title (typewriter effect) */}
+            <TypewriterText className='text-4xl lg:text-5xl xl:text-6xl mb-4'>
+              hi, i&apos;m dan
+            </TypewriterText>
 
-        {/* flexbox for content */}
-        <div className='py-20 flex-auto'>
-          {/* title (typewriter effect) */}
-          <div className="writer">
-            <div className="writer-text text-4xl lg:text-5xl xl:text-6xl mb-4">hi, i&apos;m dan </div>
+            {/* subtitles */}
+            <div className="text-xl lg:text-2xl xl:text-3xl">recent software engineering graduate.</div>
+
+            {/* information */}
+            <div className='mt-12'>  
+              {renderLinks()}
+              {/* <div className="text-sm lg:text-md xl:text-lg mt-2 md:mt-0">(based in liverpool, uk)</div> */}
+            </div>
           </div>
 
-          {/* subtitles */}
-          <div className="text-xl lg:text-2xl xl:text-3xl">software engineer. web designer.</div>
-
-          {/* information */}
-          <div className='mt-12'>  
-            {renderLinks()}
-            <div className="text-sm lg:text-md xl:text-lg mt-2 md:mt-0">(based in liverpool, uk)</div>
+          {/* flexbox for splash image */}
+          <div className='flex-auto relative w-1/3 invisible md:visible'>
+            <div className="h-full absolute right-0 invisible md:visible ">
+              <img className='h-full w-auto' draggable={false} src={`/${getBrowserImage()}`} alt="webpage" />
+            </div>
           </div>
+
         </div>
-
-        {/* flexbox for splash image */}
-        <div className='flex-auto relative w-1/3 invisible md:visible'>
-          <div className="h-full absolute right-0 invisible md:visible ">
-            <img className='h-full w-auto' draggable={false} src={`/${getBrowserImage()}`} alt="webpage" />
-          </div>
-        </div>
-
       </div>
     </>
   )

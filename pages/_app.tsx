@@ -4,10 +4,10 @@ import type { AppProps } from 'next/app'
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
-    <div className="flex flex-col h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className='mx-4 md:mx-8'>
         <NavigationBar />
 
-        <div className='flex flex-grow'>
+        <div className='min-h-screen'>
           <Component {...pageProps} />
         </div>
     </div>
