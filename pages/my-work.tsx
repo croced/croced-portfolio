@@ -7,6 +7,7 @@ import WorkBrowser from "./my-work/WorkBrowser";
 import WorkMobile from "./my-work/WorkMobile";
 import { supabase } from "supabase";
 import useThemeProvider from "@/hooks/useThemeProvider";
+import Image from 'next/image'
 
 type Project = {
   title: string;
@@ -63,8 +64,9 @@ const MyWork: React.FC = () => {
                 case "image":
                   return (
                     <div className="my-4 md:my-8 flex items-center justify-center">
-                      <img
+                      <Image
                         src={content.content as string}
+                        alt="project image"
                         className="max-w-full"
                       />
                     </div>
@@ -112,6 +114,7 @@ const MyWork: React.FC = () => {
             { 
                 projects.map((project, index) => {
                     return <li 
+                        key={`project-${index}`}
                         className={clsx(`hover:cursor-pointer`, {"underline": projectIndex === index})} 
                         onClick={() => {
                             setProjectIndex(index)

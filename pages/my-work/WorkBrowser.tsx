@@ -1,43 +1,43 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Work } from '../my-work';
+// import { Work } from '../my-work';
 
 interface Props {
-    work: Work[];
+    // work: Work[];
 };
 
-const WorkBrowser: React.FC<Props> = ({work}) => {
+const WorkBrowser: React.FC<Props> = ({}) => {
 
     const [activeTab, setActiveTab] = React.useState(0);
 
     const renderTabs = () => {
-        const tabs = work.map((item, i) => {
-            const drawLeftTab = i > 0;
-            return (
-                <div className={clsx('flex-auto', { "border-l-2 border-primary border-dashed": drawLeftTab })}>
-                    <div className={clsx( { "ml-2": drawLeftTab } )}>
-                        <p 
-                            className={clsx('text-md hover:cursor-pointer', { "underline": i === activeTab })} 
-                            onClick={() => setActiveTab(i)}
-                        >
-                            {item.title}
-                        </p>
-                        <p className='text-xs'>{item.tagline}</p>
-                    </div>
-                </div>
-            );
-        });
+        // // // const tabs = work.map((item, i) => {
+        // // //     const drawLeftTab = i > 0;
+        // // //     return (
+        // // //         <div key={`work-item-${i}`} className={clsx('flex-auto', { "border-l-2 border-primary border-dashed": drawLeftTab })}>
+        // // //             <div className={clsx( { "ml-2": drawLeftTab } )}>
+        // // //                 <p 
+        // // //                     className={clsx('text-md hover:cursor-pointer', { "underline": i === activeTab })} 
+        // // //                     onClick={() => setActiveTab(i)}
+        // // //                 >
+        // // //                     {item.title}
+        // // //                 </p>
+        // // //                 <p className='text-xs'>{item.tagline}</p>
+        // // //             </div>
+        // // //         </div>
+        // // //     );
+        // // });
 
-        return (
-            <div className='flex flex-row py-2 px-2'>
-                <div className='flex flex-row gap-x-4 px-4 mr-4'>
-                    <p>o</p>
-                    <p>o</p>
-                    <p>o</p>
-                </div>
-                {tabs}
-            </div>
-        );
+        // return (
+        //     <div className='flex flex-row py-2 px-2'>
+        //         <div className='flex flex-row gap-x-4 px-4 mr-4'>
+        //             <p>o</p>
+        //             <p>o</p>
+        //             <p>o</p>
+        //         </div>
+        //         {tabs}
+        //     </div>
+        // );
     }
 
     const renderBrowserHeader = () => {
@@ -51,7 +51,7 @@ const WorkBrowser: React.FC<Props> = ({work}) => {
                     <hr className='border-1 border-primary border-dashed' />
                     <div className='py-4'>
                         <div className='mx-8 p-2 border-2 border-dashed rounded-md border-primary'>
-                                <a className='text-xs' href={work[activeTab].url} target='_blank'>{work[activeTab].url}</a>
+                                {/* <a className='text-xs' href={work[activeTab].url} target='_blank'>{work[activeTab].url}</a> */}
                         </div>
                     </div>
                     <hr className='border-1 border-primary border-dashed' />
