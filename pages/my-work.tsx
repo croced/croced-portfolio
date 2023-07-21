@@ -1,13 +1,8 @@
-import NavigationBar from "@/components/navigation/NavigationBar";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import TypewriterText from "@/components/common/TypewriterText";
 import clsx from "clsx";
-import WorkBrowser from "./my-work/WorkBrowser";
-import WorkMobile from "./my-work/WorkMobile";
 import { supabase } from "supabase";
 import useThemeProvider from "@/hooks/useThemeProvider";
-import Image from 'next/image'
 
 type Project = {
   title: string;
@@ -64,7 +59,7 @@ const MyWork: React.FC = () => {
                 case "image":
                   return (
                     <div className="my-4 md:my-8 flex items-center justify-center">
-                      <Image
+                      <img
                         src={content.content as string}
                         alt="project image"
                         className="max-w-full"
@@ -89,22 +84,6 @@ const MyWork: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* <div className='flex flex-col md:min-h-screen'>
-
-                <div className={`md:w-auto p-4 flex flex-row gap-x-4 overflow-x-scroll whitespace-nowrap md:flex md:flex-col md:pr-16 md:sticky md:top-0 md:h-screen md:overflow-y-auto border-r-2 ${theme === 'dark' ? 'border-white bg-black' : 'border-black bg-white'}`}>
-                    <p className='md:mt-8'>Projects:</p>
-                    { 
-                        projects.map((project, index) => {
-                            return <p className={clsx(`hover:cursor-pointer`, {"underline": projectIndex === index})} onClick={() => setProjectIndex(index)}>{project.title}</p>
-                        })
-                    }
-                </div>
-
-                <div className='md:flex-1 md:p-4 md:overflow-y-auto'>
-                    { renderActiveProject() }
-                </div>
-
-            </div> */}
 
       <div className="flex flex-col md:flex-row">
         {/* Left Sidebar */}
