@@ -15,8 +15,7 @@ const useThemeProvider = () => {
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => setTheme(e.matches ? 'dark' : 'light'));
   
       return () => {
-        window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', () => {
-        });
+        window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', () => {});
       }
     }, []);
 

@@ -3,6 +3,7 @@ import Head from "next/head";
 import clsx from "clsx";
 import { supabase } from "supabase";
 import useThemeProvider from "@/hooks/useThemeProvider";
+import Slideshow from "@/components/common/Slideshow";
 
 type Project = {
   title: string;
@@ -26,7 +27,8 @@ const MyWork: React.FC = () => {
     if (error) {
       console.error("Error fetching data:", error);
     } else {
-      setProjects(data);
+      // order by id (ascending)
+      setProjects(data.sort((a, b) => a.id - b.id));
     }
   };
 
@@ -45,10 +47,8 @@ const MyWork: React.FC = () => {
 
     return (
       <>
-        {/* <div className={`border-2 p-4 ${theme === 'dark' ? 'border-white bg-black' : 'border-black bg-white'}`}> */}
         <p className="text-xl">{project.title}</p>
-        <p className="mt-2 text-sm">{project.description}</p>
-        {/* </div> */}
+        <p className="mt-2 text-sm">"{project.description}"</p>
 
         <div className="my-4">
           {project.content &&
@@ -67,7 +67,9 @@ const MyWork: React.FC = () => {
                     </div>
                   );
                 case "slideshow":
-                  return <></>;
+                  return <div className="my-4 md:my-8 flex items-center justify-center">
+                    <Slideshow images={content.content as string[]} /> 
+                  </div>;
               }
             })}
         </div>
@@ -84,33 +86,34 @@ const MyWork: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-
       <div className="flex flex-col md:flex-row">
+
         {/* Left Sidebar */}
         <div className="mb-4 md:mb-0 flex-shrink-0 w-full md:w-64 md:sticky md:top-0 md:h-screen md:flex md:flex-col md:items-start md:justify-start">
           <ul className="flex flex-row gap-4 overflow-x-scroll md:overflow-x-auto whitespace-nowrap md:flex-col md:overflow-y-auto">
             <p className="md:mt-4">projects:</p>
-            { 
-                projects.map((project, index) => {
-                    return <li 
-                        key={`project-${index}`}
-                        className={clsx(`hover:cursor-pointer`, {"underline": projectIndex === index})} 
-                        onClick={() => {
-                            setProjectIndex(index)
-                            window.scrollTo(0, 0);
-                        }}
-                    >
-                        {project.title}
-                    </li>
-                })
-            }
+            {projects.map((project, index) => {
+              return (
+                <li
+                  key={`project-${index}`}
+                  className={clsx(`hover:cursor-pointer`, {
+                    underline: projectIndex === index,
+                  })}
+                  onClick={() => {
+                    setProjectIndex(index);
+                    window.scrollTo(0, 0);
+                  }}
+                >
+                  {project.title}
+                </li>
+              );
+            })}
           </ul>
         </div>
 
         {/* Right Content Area */}
-        <div className="flex-1">
-            { renderActiveProject() }
-        </div>
+        <div className="flex-1">{renderActiveProject()}</div>
+        
       </div>
     </>
   );
