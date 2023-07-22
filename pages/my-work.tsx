@@ -48,7 +48,7 @@ const MyWork: React.FC = () => {
     return (
       <>
         <p className="text-xl">{project.title}</p>
-        <p className="mt-2 text-sm">"{project.description}"</p>
+        <p className="mt-2 text-sm">{project.description}</p>
 
         <div className="my-4">
           {project.content &&
@@ -113,7 +113,7 @@ const MyWork: React.FC = () => {
 
         {/* Right Content Area */}
         <div className="flex-1">{renderActiveProject()}</div>
-        
+
       </div>
     </>
   );
