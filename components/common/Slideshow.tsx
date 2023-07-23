@@ -36,7 +36,7 @@ const Slideshow: React.FC<Props> = ({ images }) => {
         </button>
       </div>
 
-      <div className="absolute bottom-0 left-1/2 transform -translate-y-1/2 flex items-center text-black">
+      <div className="absolute bottom-0 transform left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center text-black">
         <p className={`p-2 ${theme === 'light' ? 'bg-white border-2 border-black text-black' : 'bg-black text-white'}`}>
           {currentSlide + 1}/{images.length}
         </p>

@@ -37,7 +37,8 @@ const MyWork: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Projects retrieved:", projects);
+    if (process.env.NODE_ENV === "development")
+        console.log("Projects retrieved:", projects);
   }, [projects]);
 
   const renderActiveProject = () => {
@@ -52,13 +53,20 @@ const MyWork: React.FC = () => {
 
         <div className="my-4">
           {project.content &&
-            project.content.map((content) => {
+            project.content.map((content, index) => {
               switch (content.type) {
                 case "paragraph":
-                  return <p>{content.content}</p>;
+                  return (
+                    <p key={`${project.title}-paragraph-${index}`}>
+                      {content.content}
+                    </p>
+                  );
                 case "image":
                   return (
-                    <div className="my-4 md:my-8 flex items-center justify-center">
+                    <div
+                      key={`${project.title}-image-${index}`}
+                      className="my-4 md:my-8 flex items-center justify-center"
+                    >
                       <img
                         src={content.content as string}
                         alt="project image"
@@ -67,14 +75,26 @@ const MyWork: React.FC = () => {
                     </div>
                   );
                 case "slideshow":
-                  return <div className="my-4 md:my-8 flex items-center justify-center">
-                    <Slideshow images={content.content as string[]} /> 
-                  </div>;
+                  return (
+                    <div
+                      key={`${project.title}-slideshow-${index}`}
+                      className="my-4 md:my-8 flex items-center justify-center"
+                    >
+                      <Slideshow images={content.content as string[]} />
+                    </div>
+                  );
+                default:
+                  return null;
               }
             })}
         </div>
       </>
     );
+  };
+
+  const onProjectClick = (index: number) => {
+    setProjectIndex(index);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -87,33 +107,42 @@ const MyWork: React.FC = () => {
       </Head>
 
       <div className="flex flex-col md:flex-row">
-
         {/* Left Sidebar */}
         <div className="mb-4 md:mb-0 flex-shrink-0 w-full md:w-64 md:sticky md:top-0 md:h-screen md:flex md:flex-col md:items-start md:justify-start">
-          <ul className="flex flex-row gap-4 overflow-x-scroll md:overflow-x-auto whitespace-nowrap md:flex-col md:overflow-y-auto">
+          <ul className="flex flex-row gap-4 w-full overflow-x-scroll md:overflow-x-auto whitespace-nowrap md:flex-col md:overflow-y-auto">
             <p className="md:mt-4">projects:</p>
             {projects.map((project, index) => {
+              const liClasses = clsx(`hover:cursor-pointer`, {
+                "font-semibold": projectIndex === index,
+                "text-white/[0.6]": (projectIndex !== index) && (theme === "dark"),
+                "text-black/[0.6]": (projectIndex !== index) && (theme === "light"),
+              });
+
               return (
-                <li
-                  key={`project-${index}`}
-                  className={clsx(`hover:cursor-pointer`, {
-                    underline: projectIndex === index,
-                  })}
-                  onClick={() => {
-                    setProjectIndex(index);
-                    window.scrollTo(0, 0);
-                  }}
-                >
-                  {project.title}
-                </li>
+                <div key={`project-list-${index}`}>
+                  {/* mobile view for project list item */}
+                  <li
+                    onClick={() => onProjectClick(index)}
+                    className={clsx(liClasses, "sm:hidden")}
+                  >
+                    {project.title}
+                  </li>
+
+                  {/* desktop view for project list item */}
+                  <li
+                    onClick={() => onProjectClick(index)}
+                    className={clsx(liClasses, "hidden md:block")}
+                  >
+                    {projectIndex === index && ">"} {project.title}
+                  </li>
+                </div>
               );
             })}
           </ul>
         </div>
 
         {/* Right Content Area */}
-        <div className="flex-1">{renderActiveProject()}</div>
-
+        <div className={`flex-1`}>{renderActiveProject()}</div>
       </div>
     </>
   );
