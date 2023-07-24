@@ -23,12 +23,11 @@ const MyWork: React.FC = () => {
   const [projectIndex, setProjectIndex] = useState<number>(0);
 
   const fetchProjects = async () => {
-    const { data, error } = await supabase.from("projects").select("*");
+    const { data, error } = await supabase.from("projects").select("*").order("id", { ascending: true });
     if (error) {
       console.error("Error fetching data:", error);
     } else {
-      // order by id (ascending)
-      setProjects(data.sort((a, b) => a.id - b.id));
+      setProjects(data);
     }
   };
 
